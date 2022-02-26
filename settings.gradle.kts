@@ -1,1 +1,1 @@
-rootProject.name = "bookstore-api"
+rootProject.name = "tokyo-api"
