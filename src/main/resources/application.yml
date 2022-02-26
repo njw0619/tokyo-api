@@ -1,0 +1,31 @@
+spring:
+  profile:
+    active: local
+
+logging:
+  config: classpath:logback-${spring.profile.active}.xml
+
+---
+spring.profiles: local
+
+spring:
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/peter_store?serverTimezone=UTC&characterEncoding=UTF-8
+    username: peter_store_app
+    password: "!1Qaz@2Wsx"
+
+---
+spring.profiles: dev
+
+---
+spring.profiles: prod
+
+logging:
+  config: classpath:logback-${spring.profiles.active}.xml

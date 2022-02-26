@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_DIR" value="./logs" />
+    <property name="PACKAGE_NAME" value="com.peter.bookstoreapi" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/app.log</file>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%highlight(%-5level) %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %cyan(%logger{36}) - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePatter>${LOG_DIR}/app.%d{yyyyMMdd}.%i.log</fileNamePatter>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100mb</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>5</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%highlight(%-5level) %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %cyen(%logger{36}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="${PACKAGE_NAME}" level="DEBUG" />
+
+    <logger name="org.springframework.beans" level="INFO" />
+    <logger name="org.springframework.jdbc.datasource.SimpleDriverDataSource" level="INFO" />
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+    <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="OFF" />
+    <logger name="org.springframework.transaction" level="INFO" />
+    <logger name="org.springframework.orm.jpa" level="INFO" />
+    <logger name="com.netflix.servo.publish.JmxMetricPoller" level="OFF" />
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
